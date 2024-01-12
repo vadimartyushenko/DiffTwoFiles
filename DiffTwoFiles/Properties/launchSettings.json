@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DiffTwoFiles": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\temp\\stats.txt D:\\temp\\pt4.txt "
+    }
+  }
+}

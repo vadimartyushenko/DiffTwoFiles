@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
+﻿
 if (args.Length != 2) {
     Console.WriteLine("Only two paths required!");
     return;
