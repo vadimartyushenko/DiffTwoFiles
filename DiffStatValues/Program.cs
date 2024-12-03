@@ -93,29 +93,47 @@ internal partial class Program
             }
 
         }
-
-        if (colorsStats.Count != indexStats.Count)
-            throw new Exception("Invalid number of stats!");
-
+        
         // compare number stats
         var num = 0;
-        foreach (var (stat, value) in colorsStats)
+        var moreElDict = indexStats.Count > colorsStats.Count
+            ? indexStats
+            : colorsStats;
+        var lessElDict = indexStats.Count > colorsStats.Count 
+            ? colorsStats 
+            : indexStats;
+        var notComparedKeys = new List<string>();
+        foreach (var (stat, value) in moreElDict)
         {
-            if (!indexStats.TryGetValue(stat, out var indexStatValue))
+            if (!lessElDict.TryGetValue(stat, out var anotherStatValue))
             {
-                throw new Exception("Invalid stat!");
+                notComparedKeys.Add(stat);
             }
-            Console.WriteLine($"{num++}. {stat}: {(Math.Abs(value - indexStatValue) < threshold ? "equal" : "not equal")}");
+            Console.WriteLine($"{num++}. {stat}: {(Math.Abs(value - anotherStatValue) < threshold ? "equal" : "NOT equal")}");
         }
 
-        Console.WriteLine("Not value stats in \"HudStats.Colors.cs\"");
+        if (colorsStats.Count != indexStats.Count)
+        {
+            Console.WriteLine("\nDifferent lens of stats dict!");
+            var title = colorsStats.Count > indexStats.Count ? "\"HudStats.Colors.cs\"" : "\"Index.cshtml\"";
+            Console.WriteLine($"Not compared stats in {title}:");
+            num = 0;
+            foreach (var key in notComparedKeys)
+            {
+                Console.WriteLine($"{num++}. {key}");
+            }
+        }
+            
+        
+        
+        Console.WriteLine("\nNot value stats in \"HudStats.Colors.cs\"");
         num = 0;
         foreach (var stat in notValueColorsStats)
         {
             Console.WriteLine($"{num++}. {stat}");
         }
 
-        Console.WriteLine("Not value stats in \"Index.cshtml\"");
+        Console.WriteLine("\nNot value stats in \"Index.cshtml\"");
         num = 0;
         foreach (var stat in notValueIndexStats)
         {
