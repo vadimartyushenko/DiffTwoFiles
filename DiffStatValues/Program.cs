@@ -109,7 +109,10 @@ internal partial class Program
             {
                 notComparedKeys.Add(stat);
             }
-            Console.WriteLine($"{num++}. {stat}: {(Math.Abs(value - anotherStatValue) < threshold ? "equal" : "NOT equal")}");
+            else
+            {
+                Console.WriteLine($"{num++}. {stat}: {(Math.Abs(value - anotherStatValue) < threshold ? "equal" : "NOT equal")}");
+            }
         }
 
         if (colorsStats.Count != indexStats.Count)
