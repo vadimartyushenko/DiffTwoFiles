@@ -71,7 +71,7 @@ internal partial class Program
 
         foreach (var line in colorsTxt)
         {
-            var txt = line.Split(',')[0];
+            var txt = line.Split(',')[0].Trim();
             if (txt.Contains("All"))
                 continue;
             if (txt.Contains("NaN"))
