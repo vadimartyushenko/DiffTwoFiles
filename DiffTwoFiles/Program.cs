@@ -1,4 +1,6 @@
 ﻿
+using DiffTwoFiles.Processing;
+
 if (args.Length != 2) {
     Console.WriteLine("Only two paths required!");
     return;
@@ -10,12 +12,14 @@ if (!(fi1.Exists && fi2.Exists)) {
     Console.WriteLine($"Not found input file!");
 }
 
+var processor = new WarningProcessor();
+
 var text1 = File.ReadAllLines(fi1.FullName);
 var text2 = File.ReadAllLines(fi2.FullName);
 
-var pt_numbers = text1.Select(str => str.Trim()).ToArray();
+var pt_numbers = text1.Select(str => processor.Process(str.Trim())).ToArray();
 
-var stats_numbers = text2.Select(str => str.Trim()).ToArray();
+var stats_numbers = text2.Select(str => processor.Process(str.Trim())).ToArray();
 
 var f1_uniq_numbers = pt_numbers.Except(stats_numbers).ToArray();
 
