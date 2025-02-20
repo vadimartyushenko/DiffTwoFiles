@@ -26,8 +26,10 @@ var f1_uniq_numbers = pt_numbers.Except(stats_numbers).ToArray();
 if (f1_uniq_numbers.Length > 0)
 {
     Console.WriteLine($"Uniq strings for file \"{fi1.Name}\"");
+    var idx = 0;
     foreach (var num in f1_uniq_numbers)
     {
+        Console.Write($"{idx++}:\t");
         Console.WriteLine(num);
     }
 } else {

@@ -2,7 +2,7 @@
   "profiles": {
     "DiffTwoFiles": {
       "commandName": "Project",
-      "commandLineArgs": "D:\\temp\\stats.txt D:\\temp\\pt4.txt "
+      "commandLineArgs": "C:\\Users\\Vadim\\Downloads\\warnings_compare\\warnings_cdb.txt C:\\Users\\Vadim\\Downloads\\warnings_compare\\warnings.txt"
     }
   }
 }
