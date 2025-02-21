@@ -17,9 +17,9 @@ var processor = new WarningProcessor();
 var text1 = File.ReadAllLines(fi1.FullName);
 var text2 = File.ReadAllLines(fi2.FullName);
 
-var pt_numbers = text1.Select(str => processor.Process(str.Trim())).ToArray();
+var pt_numbers = text1.OrderDescending().Select(str => processor.Process(str).Trim()).ToArray();
 
-var stats_numbers = text2.Select(str => processor.Process(str.Trim())).ToArray();
+var stats_numbers = text2.OrderDescending().Select(str => processor.Process(str).Trim()).ToArray();
 
 var f1_uniq_numbers = pt_numbers.Except(stats_numbers).ToArray();
 
