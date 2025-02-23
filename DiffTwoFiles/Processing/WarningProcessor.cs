@@ -18,9 +18,9 @@ public class WarningProcessor : IProcess
             return input;
         
         var res = input.Remove(start, end - start + 1);
-        start = res.IndexOf('[');
-        end = res.IndexOf(']');
-        if (start < 0 || end < 0)
+        start = res.LastIndexOf('[');
+        end = res.LastIndexOf(']');
+        if (start < 0 || end < 0 || end <= start + 1)
             return res;
         var output = res.Remove(start, end - start + 1);
         return output;
