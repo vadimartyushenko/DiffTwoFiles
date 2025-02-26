@@ -1,10 +1,14 @@
 ﻿
+using System.Globalization;
 using DiffTwoFiles.Processing;
+using DiffTwoFiles.Services;
 
 if (args.Length != 2) {
     Console.WriteLine("Only two paths required!");
     return;
 }
+
+CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
 var fi1 = new FileInfo(args[0]);
 var fi2 = new FileInfo(args[1]);
@@ -16,6 +20,8 @@ var processor = new WarningProcessor();
 
 var text1 = File.ReadAllLines(fi1.FullName);
 var text2 = File.ReadAllLines(fi2.FullName);
+
+var warnStats = WarningStatsCalcService.GetStats(text2).OrderByDescending(x => x.Value).ToDictionary();
 
 var pt_numbers = text1.OrderDescending().Select(str => processor.Process(str).Trim()).ToArray();
 
